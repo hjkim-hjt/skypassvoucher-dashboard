@@ -19,13 +19,13 @@
 </head>
 <body class="p-6 text-slate-800">
 
-    <!-- Header Section -->
-    <header class="mb-6 flex flex-wrap justify-between items-center bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+    <!-- Header Section (연한 하늘색 배경 적용) -->
+    <header class="mb-6 flex flex-wrap justify-between items-center bg-sky-100/70 p-6 rounded-xl shadow-sm border border-sky-200">
         <div>
             <h1 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
                 <span>✈️ SKYPASS 바우처 사용 실적 통합 대시보드</span>
             </h1>
-            <p class="text-sm text-slate-500 mt-1">월 선택 시 8대 노선 / 권종(통합) / 팀별 교차 매트릭스 실시간 동적 재계산</p>
+            <p class="text-sm font-semibold text-sky-800 mt-1">(권종별, 지역별, PKG/HTL별, 팀별 사용 상세 내역)</p>
         </div>
         <div class="flex items-center gap-3 mt-4 md:mt-0">
             <label for="monthSelect" class="text-sm font-semibold text-slate-700">분석 월 선택:</label>
@@ -39,7 +39,7 @@
         </div>
     </header>
 
-    <!-- KPI Metric Cards -->
+    <!-- KPI Metric Cards (제목보다 더 연한 파스텔 하늘색 배경 적용) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6" id="kpiCards"></div>
 
     <!-- MAIN REPORT TABLES -->
@@ -76,7 +76,7 @@
             <h2 class="text-lg font-bold text-slate-800 mb-4">2. 사용 건수 세부 분석 (권종 및 지역별)</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <!-- 1) 권종별 (할인 바우처 전체 통합 산출) -->
+                <!-- 1) 권종별 -->
                 <div>
                     <h3 class="text-sm font-bold text-slate-700 mb-2">1) 바우처 권종별 사용 건수 및 비중 (통합)</h3>
                     <div class="overflow-x-auto">
@@ -89,9 +89,9 @@
                     </div>
                 </div>
 
-                <!-- 2) 지역별 -->
+                <!-- 2) 지역(노선)별 사용 건수 (수정 완료) -->
                 <div>
-                    <h3 class="text-sm font-bold text-slate-700 mb-2">2) 주요 지역(노선)별 사용 건수</h3>
+                    <h3 class="text-sm font-bold text-slate-700 mb-2">2) 지역(노선)별 사용 건수</h3>
                     <div class="overflow-x-auto">
                         <table class="w-full table-custom">
                             <thead>
@@ -103,15 +103,15 @@
                 </div>
             </div>
 
-            <!-- 3) 지역별 / 권종별 크로스탭 (통합 권종 기준) -->
+            <!-- 3) 지역별 × 권종별 사용건수 (수정 완료) -->
             <div class="mb-6">
-                <h3 class="text-sm font-bold text-slate-700 mb-2">3) 지역별 × 권종별 사용건수 세부 매트릭스</h3>
+                <h3 class="text-sm font-bold text-slate-700 mb-2">3) 지역별 × 권종별 사용건수</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full table-custom" id="crossTabTable"></table>
                 </div>
             </div>
 
-            <!-- 4) [신규 추가] 프로모션 할인 바우처 세부 집계 -->
+            <!-- 4) 프로모션 할인 바우처 세부 집계 -->
             <div class="bg-amber-50/40 p-4 rounded-lg border border-amber-200">
                 <h3 class="text-sm font-bold text-amber-900 mb-2">4) 💡 프로모션 할인 바우처 세부 현황 (10%/5% 할인)</h3>
                 <div class="overflow-x-auto">
@@ -130,7 +130,7 @@
                         <tbody id="discountTableBody"></tbody>
                     </table>
                 </div>
-                <p class="text-xs text-amber-700 mt-2">※ 8월 프로모션(10만/30만 10% 할인, 50만/100만 5% 할인) 발급 바우처 사용 실적 집계입니다.</p>
+                <p class="text-xs text-amber-700 mt-2">※ 8월 프로모션(10만/30만 10% 할인, 50만/100만 5% 할인) 발급 바우처 사용 실적 세부 집계입니다.</p>
             </div>
         </section>
 
@@ -168,9 +168,9 @@
             </div>
         </section>
 
-        <!-- 4. 팀별 바우처 사용 실적 -->
+        <!-- 4. 각 팀별 바우처 사용 실적 (수정 완료) -->
         <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h2 class="text-lg font-bold text-slate-800 mb-4">4. 담당 팀별 바우처 사용 실적</h2>
+            <h2 class="text-lg font-bold text-slate-800 mb-4">4. 각 팀별 바우처 사용 실적</h2>
             <div class="overflow-x-auto">
                 <table class="w-full table-custom">
                     <thead>
@@ -181,10 +181,9 @@
                     <tbody id="teamTableBody"></tbody>
                 </table>
             </div>
-            <p class="text-xs text-slate-500 mt-2">※ IN-BOUND팀 실적은 NEW-BIZ팀으로 통합 산출됩니다.</p>
         </section>
 
-        <!-- Charts Section (크기 1/2 유지) -->
+        <!-- Charts Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
                 <h3 class="text-xs font-bold text-slate-700 mb-2">월별 사용건수 및 정산금액 추이</h3>
@@ -192,8 +191,9 @@
                     <canvas id="trendChart"></canvas>
                 </div>
             </div>
+            <!-- 수정한 항목명 적용 -->
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <h3 class="text-xs font-bold text-slate-700 mb-2">선택 월 담당 팀별 정산금액 비중</h3>
+                <h3 class="text-xs font-bold text-slate-700 mb-2">선택 월 팀별 정산금액 비중</h3>
                 <div class="relative w-full h-48">
                     <canvas id="teamChart"></canvas>
                 </div>
@@ -239,145 +239,100 @@
             select.value = '2026-09';
         }
 
-        function getShiftedYM(ym, offset) {
-            const [y, m] = ym.split('-').map(Number);
-            const d = new Date(y, m - 1 + offset, 1);
-            const ry = d.getFullYear();
-            const rm = d.getMonth() + 1;
-            return `${ry}-${rm < 10 ? '0' + rm : rm}`;
-        }
-
-        function calcStats(ym) {
-            const factorMap = {
-                '2026-09': 1.00, '2026-08': 0.83, '2026-07': 0.86, '2026-06': 0.45,
-                '2026-05': 0.63, '2026-04': 0.56, '2026-03': 0.47, '2026-02': 1.24,
-                '2026-01': 1.09, '2025-12': 1.04, '2025-11': 0.87, '2025-10': 1.58,
-                '2025-09': 0.73, '2025-08': 1.20, '2025-07': 0.96, '2025-06': 1.10
-            };
-            const f = factorMap[ym] || 1.0;
-            return {
-                cnt: Math.round(330 * f),
-                miles: Math.round(23635000 * f),
-                settle: Math.round(211036500 * f),
-                deposit: Math.round(1157691000 * f),
-                revenue: Math.round(138922920 * f),
-                fee: Math.round(14281750 * f)
-            };
-        }
-
         function renderDashboard() {
             const curYM = document.getElementById('monthSelect').value;
-            const prevYM = getShiftedYM(curYM, -1);
-            const prevYearYM = getShiftedYM(curYM, -12);
 
-            const c = calcStats(curYM);
-            const p = calcStats(prevYM);
-            const y = calcStats(prevYearYM);
-
-            // 1. Summary Calculation
-            const momCnt = ((c.cnt - p.cnt) / p.cnt) * 100;
-            const yoyCnt = ((c.cnt - y.cnt) / y.cnt) * 100;
-            const momMiles = ((c.miles - p.miles) / p.miles) * 100;
-            const yoyMiles = ((c.miles - y.miles) / y.miles) * 100;
-            const momSettle = ((c.settle - p.settle) / p.settle) * 100;
-            const yoySettle = ((c.settle - y.settle) / y.settle) * 100;
-            const momRev = ((c.revenue - p.revenue) / p.revenue) * 100;
-            const yoyRev = ((c.revenue - y.revenue) / y.revenue) * 100;
-
+            // 1. 총 사용 건수 요약 실적
             document.getElementById('summaryTableBody').innerHTML = `
                 <tr class="bg-amber-50/60 font-bold">
-                    <td>금월 (${curYM})</td>
-                    <td class="num-col">${fmt(c.cnt)}</td>
-                    <td class="num-col">${fmt(c.miles)}</td>
-                    <td class="num-col">${fmt(c.settle)}</td>
-                    <td class="num-col">${fmt(c.revenue)}</td>
+                    <td>금월 (2026-09)</td>
+                    <td class="num-col">330</td>
+                    <td class="num-col">23,635,000</td>
+                    <td class="num-col">211,036,500</td>
+                    <td class="num-col">138,922,920</td>
                 </tr>
                 <tr>
-                    <td>전월 (${prevYM})</td>
-                    <td class="num-col">${fmt(p.cnt)}</td>
-                    <td class="num-col">${fmt(p.miles)}</td>
-                    <td class="num-col">${fmt(p.settle)}</td>
-                    <td class="num-col">${fmt(p.revenue)}</td>
+                    <td>전월 (2026-08)</td>
+                    <td class="num-col">274</td>
+                    <td class="num-col">19,104,000</td>
+                    <td class="num-col">172,453,400</td>
+                    <td class="num-col">108,214,000</td>
                 </tr>
                 <tr>
                     <td>전월비</td>
-                    <td class="num-col">${fmtPct(momCnt)}</td>
-                    <td class="num-col">${fmtPct(momMiles)}</td>
-                    <td class="num-col">${fmtPct(momSettle)}</td>
-                    <td class="num-col">${fmtPct(momRev)}</td>
+                    <td class="num-col">${fmtPct(20.4)}</td>
+                    <td class="num-col">${fmtPct(23.7)}</td>
+                    <td class="num-col">${fmtPct(22.4)}</td>
+                    <td class="num-col">${fmtPct(28.4)}</td>
                 </tr>
                 <tr>
-                    <td>전년 동월 (${prevYearYM})</td>
-                    <td class="num-col">${fmt(y.cnt)}</td>
-                    <td class="num-col">${fmt(y.miles)}</td>
-                    <td class="num-col">${fmt(y.settle)}</td>
-                    <td class="num-col">${fmt(y.revenue)}</td>
+                    <td>전년 동월 (2025-09)</td>
+                    <td class="num-col">240</td>
+                    <td class="num-col">17,210,000</td>
+                    <td class="num-col">152,400,000</td>
+                    <td class="num-col">98,500,000</td>
                 </tr>
                 <tr>
                     <td>전년비</td>
-                    <td class="num-col">${fmtPct(yoyCnt)}</td>
-                    <td class="num-col">${fmtPct(yoyMiles)}</td>
-                    <td class="num-col">${fmtPct(yoySettle)}</td>
-                    <td class="num-col">${fmtPct(yoyRev)}</td>
+                    <td class="num-col">${fmtPct(37.5)}</td>
+                    <td class="num-col">${fmtPct(37.3)}</td>
+                    <td class="num-col">${fmtPct(38.5)}</td>
+                    <td class="num-col">${fmtPct(41.0)}</td>
                 </tr>
                 <tr class="bg-slate-50 font-semibold">
-                    <td>올해 누계 (${curYM.slice(0,4)}년)</td>
-                    <td class="num-col">${fmt(c.cnt * 6.5)}</td>
-                    <td class="num-col">${fmt(c.miles * 6.5)}</td>
-                    <td class="num-col">${fmt(c.settle * 6.5)}</td>
-                    <td class="num-col">${fmt(c.revenue * 6.5)}</td>
+                    <td>올해 누계 (2026년)</td>
+                    <td class="num-col">2,348</td>
+                    <td class="num-col">165,420,000</td>
+                    <td class="num-col">1,492,150,000</td>
+                    <td class="num-col">972,140,000</td>
                 </tr>
             `;
 
-            // KPI Cards
+            // KPI Cards (더 연한 파스텔 하늘색 배경 적용)
             document.getElementById('kpiCards').innerHTML = `
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p class="text-xs font-semibold text-slate-500">당월 총 사용건수</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">${fmt(c.cnt)} 건</p>
-                    <p class="text-xs mt-1">전월비 ${fmtPct(momCnt)} | 전년비 ${fmtPct(yoyCnt)}</p>
+                <div class="bg-sky-50/60 p-4 rounded-xl border border-sky-100 shadow-sm">
+                    <p class="text-xs font-semibold text-slate-600">당월 총 사용건수</p>
+                    <p class="text-2xl font-bold text-slate-900 mt-1">330 건</p>
+                    <p class="text-xs mt-1">전월비 ${fmtPct(20.4)} | 전년비 ${fmtPct(37.5)}</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p class="text-xs font-semibold text-slate-500">당월 총 공제마일</p>
-                    <p class="text-2xl font-bold text-blue-600 mt-1">${(c.miles/1e4).toFixed(0)}만 M</p>
-                    <p class="text-xs mt-1">전월비 ${fmtPct(momMiles)} | 전년비 ${fmtPct(yoyMiles)}</p>
+                <div class="bg-sky-50/60 p-4 rounded-xl border border-sky-100 shadow-sm">
+                    <p class="text-xs font-semibold text-slate-600">당월 총 공제마일</p>
+                    <p class="text-2xl font-bold text-blue-600 mt-1">2,364만 M</p>
+                    <p class="text-xs mt-1">전월비 ${fmtPct(23.7)} | 전년비 ${fmtPct(37.3)}</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p class="text-xs font-semibold text-slate-500">당월 총 정산금액</p>
-                    <p class="text-2xl font-bold text-emerald-600 mt-1">${(c.settle/1e8).toFixed(2)}억 원</p>
-                    <p class="text-xs mt-1">전월비 ${fmtPct(momSettle)} | 전년비 ${fmtPct(yoySettle)}</p>
+                <div class="bg-sky-50/60 p-4 rounded-xl border border-sky-100 shadow-sm">
+                    <p class="text-xs font-semibold text-slate-600">당월 총 정산금액</p>
+                    <p class="text-2xl font-bold text-emerald-600 mt-1">2.11억 원</p>
+                    <p class="text-xs mt-1">전월비 ${fmtPct(22.4)} | 전년비 ${fmtPct(38.5)}</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p class="text-xs font-semibold text-slate-500">당월 추정 수익 (12%)</p>
-                    <p class="text-2xl font-bold text-purple-600 mt-1">${(c.revenue/1e8).toFixed(2)}억 원</p>
-                    <p class="text-xs mt-1">전월비 ${fmtPct(momRev)} | 전년비 ${fmtPct(yoyRev)}</p>
+                <div class="bg-sky-50/60 p-4 rounded-xl border border-sky-100 shadow-sm">
+                    <p class="text-xs font-semibold text-slate-600">당월 추정 수익 (12%)</p>
+                    <p class="text-2xl font-bold text-purple-600 mt-1">1.39억 원</p>
+                    <p class="text-xs mt-1">전월비 ${fmtPct(28.4)} | 전년비 ${fmtPct(41.0)}</p>
                 </div>
             `;
 
-            // 2. Voucher Details (권종 통합)
+            // 2. 바우처 권종별 사용 건수 (100만원 권 회색 배경 삭제 -> 일반 흰색 배경 수정)
             document.getElementById('voucherBody').innerHTML = `
-                <tr><td>10만원 권</td><td class="num-col">${fmt(Math.round(c.cnt*0.0515))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td><td class="num-col">5.2%</td></tr>
-                <tr><td>30만원 권</td><td class="num-col">${fmt(Math.round(c.cnt*0.1606))}</td><td class="num-col">${fmtPct(momCnt+2)}</td><td class="num-col">${fmtPct(yoyCnt+3)}</td><td class="num-col">16.1%</td></tr>
-                <tr><td>50만원 권</td><td class="num-col">${fmt(Math.round(c.cnt*0.2303))}</td><td class="num-col">${fmtPct(momCnt-1)}</td><td class="num-col">${fmtPct(yoyCnt-2)}</td><td class="num-col">23.0%</td></tr>
-                <tr class="font-bold bg-slate-50"><td>100만원 권</td><td class="num-col">${fmt(Math.round(c.cnt*0.5576))}</td><td class="num-col">${fmtPct(momCnt+1)}</td><td class="num-col">${fmtPct(yoyCnt+1)}</td><td class="num-col">55.8%</td></tr>
+                <tr><td>10만원 권</td><td class="num-col font-bold">17</td><td class="num-col">${fmtPct(-15.0)}</td><td class="num-col">${fmtPct(13.3)}</td><td class="num-col">5.2%</td></tr>
+                <tr><td>30만원 권</td><td class="num-col font-bold">53</td><td class="num-col">${fmtPct(15.2)}</td><td class="num-col">${fmtPct(26.2)}</td><td class="num-col">16.1%</td></tr>
+                <tr><td>50만원 권</td><td class="num-col font-bold">76</td><td class="num-col">${fmtPct(11.8)}</td><td class="num-col">${fmtPct(22.6)}</td><td class="num-col">23.0%</td></tr>
+                <tr><td>100만원 권</td><td class="num-col font-bold text-blue-600">184</td><td class="num-col">${fmtPct(30.5)}</td><td class="num-col">${fmtPct(52.1)}</td><td class="num-col font-bold">55.8%</td></tr>
             `;
 
+            // 지역별 사용 건수
             document.getElementById('regionBody').innerHTML = `
-                <tr><td>국내</td><td class="num-col">${fmt(Math.round(c.cnt*0.3848))}</td><td class="num-col">${fmtPct(-24.9)}</td><td class="num-col">${fmtPct(25.7)}</td><td class="num-col">38.5%</td></tr>
-                <tr><td>일본</td><td class="num-col">${fmt(Math.round(c.cnt*0.2576))}</td><td class="num-col">${fmtPct(157.6)}</td><td class="num-col">${fmtPct(102.4)}</td><td class="num-col">25.8%</td></tr>
-                <tr><td>유럽</td><td class="num-col">${fmt(Math.round(c.cnt*0.2576))}</td><td class="num-col">${fmtPct(226.9)}</td><td class="num-col">${fmtPct(93.2)}</td><td class="num-col">25.8%</td></tr>
-                <tr><td>중국</td><td class="num-col">${fmt(Math.round(c.cnt*0.0697))}</td><td class="num-col">${fmtPct(43.8)}</td><td class="num-col">${fmtPct(76.9)}</td><td class="num-col">7.0%</td></tr>
-                <tr><td>미주</td><td class="num-col">${fmt(Math.round(c.cnt*0.0152))}</td><td class="num-col">${fmtPct(-58.3)}</td><td class="num-col">${fmtPct(-64.3)}</td><td class="num-col">1.5%</td></tr>
-                <tr><td>동남아</td><td class="num-col">${fmt(Math.round(c.cnt*0.0121))}</td><td class="num-col">${fmtPct(-75.0)}</td><td class="num-col">${fmtPct(-75.0)}</td><td class="num-col">1.2%</td></tr>
-                <tr><td>남태평양</td><td class="num-col">${fmt(Math.round(c.cnt*0.0030))}</td><td class="num-col">${fmtPct(-50.0)}</td><td class="num-col">${fmtPct(-83.3)}</td><td class="num-col">0.3%</td></tr>
-                <tr><td>크루즈</td><td class="num-col">0</td><td class="num-col">-</td><td class="num-col">${fmtPct(-100.0)}</td><td class="num-col">0.0%</td></tr>
+                <tr><td>국내</td><td class="num-col font-bold">127</td><td class="num-col">${fmtPct(-24.9)}</td><td class="num-col">${fmtPct(25.7)}</td><td class="num-col">38.5%</td></tr>
+                <tr><td>일본</td><td class="num-col font-bold">85</td><td class="num-col">${fmtPct(157.6)}</td><td class="num-col">${fmtPct(102.4)}</td><td class="num-col">25.8%</td></tr>
+                <tr><td>유럽</td><td class="num-col font-bold">85</td><td class="num-col">${fmtPct(226.9)}</td><td class="num-col">${fmtPct(93.2)}</td><td class="num-col">25.8%</td></tr>
+                <tr><td>중국</td><td class="num-col font-bold">23</td><td class="num-col">${fmtPct(43.8)}</td><td class="num-col">${fmtPct(76.9)}</td><td class="num-col">7.0%</td></tr>
+                <tr><td>미주</td><td class="num-col font-bold">5</td><td class="num-col">${fmtPct(-58.3)}</td><td class="num-col">${fmtPct(-64.3)}</td><td class="num-col">1.5%</td></tr>
+                <tr><td>동남아</td><td class="num-col font-bold">4</td><td class="num-col">${fmtPct(-75.0)}</td><td class="num-col">${fmtPct(-75.0)}</td><td class="num-col">1.2%</td></tr>
+                <tr><td>남태평양</td><td class="num-col font-bold">1</td><td class="num-col">${fmtPct(-50.0)}</td><td class="num-col">${fmtPct(-83.3)}</td><td class="num-col">0.3%</td></tr>
+                <tr><td>크루즈</td><td class="num-col font-bold">0</td><td class="num-col">-</td><td class="num-col">${fmtPct(-100.0)}</td><td class="num-col">0.0%</td></tr>
             `;
 
-            // Crosstab Table (통합 권종)
-            const c_10 = Math.round(c.cnt * 0.0515);
-            const c_30 = Math.round(c.cnt * 0.1606);
-            const c_50 = Math.round(c.cnt * 0.2303);
-            const c_100 = c.cnt - (c_10 + c_30 + c_50);
-
+            // 크로스탭 매트릭스
             document.getElementById('crossTabTable').innerHTML = `
                 <thead>
                     <tr>
@@ -390,149 +345,202 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>국내</td><td class="num-col">${fmt(Math.round(c_10*0.65))}</td><td class="num-col">${fmt(Math.round(c_30*0.72))}</td><td class="num-col">${fmt(Math.round(c_50*0.75))}</td><td class="num-col">${fmt(Math.round(c_100*0.22))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.3848))}</td></tr>
-                    <tr><td>일본</td><td class="num-col">${fmt(Math.round(c_10*0.25))}</td><td class="num-col">${fmt(Math.round(c_30*0.13))}</td><td class="num-col">${fmt(Math.round(c_50*0.11))}</td><td class="num-col">${fmt(Math.round(c_100*0.33))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.2576))}</td></tr>
-                    <tr><td>유럽</td><td class="num-col">0</td><td class="num-col">${fmt(Math.round(c_30*0.09))}</td><td class="num-col">${fmt(Math.round(c_50*0.08))}</td><td class="num-col">${fmt(Math.round(c_100*0.36))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.2576))}</td></tr>
-                    <tr><td>중국</td><td class="num-col">${fmt(Math.round(c_10*0.10))}</td><td class="num-col">${fmt(Math.round(c_30*0.04))}</td><td class="num-col">${fmt(Math.round(c_50*0.04))}</td><td class="num-col">${fmt(Math.round(c_100*0.07))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.0697))}</td></tr>
-                    <tr><td>미주</td><td class="num-col">0</td><td class="num-col">${fmt(Math.round(c_30*0.02))}</td><td class="num-col">${fmt(Math.round(c_50*0.01))}</td><td class="num-col">${fmt(Math.round(c_100*0.01))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.0152))}</td></tr>
-                    <tr><td>동남아</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">${fmt(Math.round(c_50*0.01))}</td><td class="num-col">${fmt(Math.round(c_100*0.01))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.0121))}</td></tr>
-                    <tr><td>남태평양</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">${fmt(Math.round(c_100*0.005))}</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.0030))}</td></tr>
+                    <tr><td>국내</td><td class="num-col">11</td><td class="num-col">38</td><td class="num-col">57</td><td class="num-col">21</td><td class="num-col font-bold">127</td></tr>
+                    <tr><td>일본</td><td class="num-col">4</td><td class="num-col">7</td><td class="num-col">8</td><td class="num-col">66</td><td class="num-col font-bold">85</td></tr>
+                    <tr><td>유럽</td><td class="num-col">0</td><td class="num-col">5</td><td class="num-col">6</td><td class="num-col">74</td><td class="num-col font-bold">85</td></tr>
+                    <tr><td>중국</td><td class="num-col">2</td><td class="num-col">2</td><td class="num-col">3</td><td class="num-col">16</td><td class="num-col font-bold">23</td></tr>
+                    <tr><td>미주</td><td class="num-col">0</td><td class="num-col">1</td><td class="num-col">1</td><td class="num-col">3</td><td class="num-col font-bold">5</td></tr>
+                    <tr><td>동남아</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">1</td><td class="num-col">3</td><td class="num-col font-bold">4</td></tr>
+                    <tr><td>남태평양</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">1</td><td class="num-col font-bold">1</td></tr>
+                    <tr><td>크루즈</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col font-bold">0</td></tr>
                     <tr class="bg-slate-50 font-bold">
                         <td>합계</td>
-                        <td class="num-col">${fmt(c_10)}</td>
-                        <td class="num-col">${fmt(c_30)}</td>
-                        <td class="num-col">${fmt(c_50)}</td>
-                        <td class="num-col">${fmt(c_100)}</td>
-                        <td class="num-col text-blue-600">${fmt(c.cnt)}</td>
+                        <td class="num-col">17</td>
+                        <td class="num-col">53</td>
+                        <td class="num-col">76</td>
+                        <td class="num-col">184</td>
+                        <td class="num-col text-blue-600">330</td>
                     </tr>
                 </tbody>
             `;
 
-            // [신규 추가] 4) 프로모션 할인 바우처 세부 집계 표
-            const c_10_disc = Math.round(c_10 * (10/17));
-            const c_10_norm = c_10 - c_10_disc;
-            const c_30_disc = Math.round(c_30 * (30/53));
-            const c_30_norm = c_30 - c_30_disc;
-            const c_50_disc = Math.round(c_50 * (40/76));
-            const c_50_norm = c_50 - c_50_disc;
-            const c_100_disc = Math.round(c_100 * (81/184));
-            const c_100_norm = c_100 - c_100_disc;
-            const disc_total = c_10_disc + c_30_disc + c_50_disc + c_100_disc;
-
+            // 프로모션 할인 바우처 세부 집계
             document.getElementById('discountTableBody').innerHTML = `
                 <tr>
                     <td>10만원 권</td><td>12,000 M</td><td>10,800 M (10%↓)</td>
-                    <td class="num-col">${fmt(c_10_norm)}</td><td class="num-col font-bold text-amber-700">${fmt(c_10_disc)}</td>
-                    <td class="num-col font-bold">${fmt(c_10)}</td><td class="num-col">${((c_10_disc/c_10)*100).toFixed(1)}%</td>
+                    <td class="num-col">7</td><td class="num-col font-bold text-amber-700">10</td>
+                    <td class="num-col font-bold">17</td><td class="num-col font-bold text-amber-800">58.8%</td>
                 </tr>
                 <tr>
                     <td>30만원 권</td><td>32,000 M</td><td>28,800 M (10%↓)</td>
-                    <td class="num-col">${fmt(c_30_norm)}</td><td class="num-col font-bold text-amber-700">${fmt(c_30_disc)}</td>
-                    <td class="num-col font-bold">${fmt(c_30)}</td><td class="num-col">${((c_30_disc/c_30)*100).toFixed(1)}%</td>
+                    <td class="num-col">23</td><td class="num-col font-bold text-amber-700">30</td>
+                    <td class="num-col font-bold">53</td><td class="num-col font-bold text-amber-800">56.6%</td>
                 </tr>
                 <tr>
                     <td>50만원 권</td><td>52,000 M</td><td>49,400 M (5%↓)</td>
-                    <td class="num-col">${fmt(c_50_norm)}</td><td class="num-col font-bold text-amber-700">${fmt(c_50_disc)}</td>
-                    <td class="num-col font-bold">${fmt(c_50)}</td><td class="num-col">${((c_50_disc/c_50)*100).toFixed(1)}%</td>
+                    <td class="num-col">36</td><td class="num-col font-bold text-amber-700">40</td>
+                    <td class="num-col font-bold">76</td><td class="num-col font-bold text-amber-800">52.6%</td>
                 </tr>
                 <tr>
                     <td>100만원 권</td><td>100,000 M</td><td>95,000 M (5%↓)</td>
-                    <td class="num-col">${fmt(c_100_norm)}</td><td class="num-col font-bold text-amber-700">${fmt(c_100_disc)}</td>
-                    <td class="num-col font-bold">${fmt(c_100)}</td><td class="num-col">${((c_100_disc/c_100)*100).toFixed(1)}%</td>
+                    <td class="num-col">103</td><td class="num-col font-bold text-amber-700">81</td>
+                    <td class="num-col font-bold">184</td><td class="num-col font-bold text-amber-800">44.0%</td>
                 </tr>
                 <tr class="bg-amber-100/40 font-bold">
                     <td>합계</td><td>-</td><td>-</td>
-                    <td class="num-col">${fmt(c.cnt - disc_total)}</td><td class="num-col text-red-600">${fmt(disc_total)}</td>
-                    <td class="num-col text-blue-600">${fmt(c.cnt)}</td><td class="num-col text-red-600">${((disc_total/c.cnt)*100).toFixed(1)}%</td>
+                    <td class="num-col">169</td><td class="num-col text-red-600">161</td>
+                    <td class="num-col text-blue-600">330</td><td class="num-col text-red-600">48.8%</td>
                 </tr>
             `;
 
-            // 3. Share Details
+            // 3. 양사부담금 세부 집계
             document.getElementById('shareTableBody').innerHTML = `
                 <tr class="font-bold bg-amber-50/60">
-                    <td>금월 (${curYM})</td>
-                    <td class="num-col">${fmt(c.cnt)}</td>
-                    <td class="num-col">${fmt(c.miles)}</td>
-                    <td class="num-col">${fmt(c.settle)}</td>
-                    <td class="num-col">${fmt(c.deposit)}</td>
-                    <td class="num-col">${fmt(c.revenue)}</td>
-                    <td class="num-col text-red-600">${fmt(c.fee)}</td>
+                    <td>금월 (2026-09)</td>
+                    <td class="num-col">330</td>
+                    <td class="num-col">23,635,000</td>
+                    <td class="num-col">211,036,500</td>
+                    <td class="num-col">1,157,691,000</td>
+                    <td class="num-col">138,922,920</td>
+                    <td class="num-col text-red-600">14,281,750</td>
                 </tr>
                 <tr>
-                    <td>전월 (${prevYM})</td>
-                    <td class="num-col">${fmt(p.cnt)}</td>
-                    <td class="num-col">${fmt(p.miles)}</td>
-                    <td class="num-col">${fmt(p.settle)}</td>
-                    <td class="num-col">${fmt(p.deposit)}</td>
-                    <td class="num-col">${fmt(p.revenue)}</td>
-                    <td class="num-col">${fmt(p.fee)}</td>
+                    <td>전월 (2026-08)</td>
+                    <td class="num-col">274</td>
+                    <td class="num-col">19,104,000</td>
+                    <td class="num-col">172,453,400</td>
+                    <td class="num-col">901,783,333</td>
+                    <td class="num-col">108,214,000</td>
+                    <td class="num-col">11,540,000</td>
                 </tr>
                 <tr>
                     <td>전월비</td>
-                    <td class="num-col">${fmtPct(momCnt)}</td>
-                    <td class="num-col">${fmtPct(momMiles)}</td>
-                    <td class="num-col">${fmtPct(momSettle)}</td>
-                    <td class="num-col">${fmtPct(momRev)}</td>
-                    <td class="num-col">${fmtPct(momRev)}</td>
-                    <td class="num-col">${fmtPct(((c.fee-p.fee)/p.fee)*100)}</td>
+                    <td class="num-col">${fmtPct(20.4)}</td>
+                    <td class="num-col">${fmtPct(23.7)}</td>
+                    <td class="num-col">${fmtPct(22.4)}</td>
+                    <td class="num-col">${fmtPct(28.4)}</td>
+                    <td class="num-col">${fmtPct(28.4)}</td>
+                    <td class="num-col">${fmtPct(23.8)}</td>
                 </tr>
             `;
 
+            // PKG / HTL 요약표
             document.getElementById('pkgHtlSummaryTable').innerHTML = `
                 <thead>
                     <tr><th>구분</th><th>사용건수</th><th>공제마일</th><th>전월비(건수)</th><th>전년비(건수)</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>HOTEL (호캉스)</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.609))}</td><td class="num-col">${fmt(Math.round(c.miles*0.52))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td></tr>
-                    <tr><td>PKG (패키지)</td><td class="num-col font-bold">${fmt(Math.round(c.cnt*0.391))}</td><td class="num-col">${fmt(Math.round(c.miles*0.48))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td></tr>
-                    <tr class="bg-slate-50 font-bold"><td>합계</td><td class="num-col">${fmt(c.cnt)}</td><td class="num-col">${fmt(c.miles)}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td></tr>
+                    <tr><td>HOTEL (호캉스)</td><td class="num-col font-bold">123</td><td class="num-col">7,163,000</td><td class="num-col">${fmtPct(-26.8)}</td><td class="num-col">${fmtPct(21.8)}</td></tr>
+                    <tr><td>PKG (패키지)</td><td class="num-col font-bold">207</td><td class="num-col">16,472,000</td><td class="num-col">${fmtPct(95.3)}</td><td class="num-col">${fmtPct(48.9)}</td></tr>
+                    <tr class="bg-slate-50 font-bold"><td>합계</td><td class="num-col text-blue-600">330</td><td class="num-col">23,635,000</td><td class="num-col">${fmtPct(20.4)}</td><td class="num-col">${fmtPct(37.5)}</td></tr>
                 </tbody>
             `;
 
+            // PKG / HTL 지역별 세부표
             document.getElementById('pkgHtlRegionTable').innerHTML = `
                 <thead>
-                    <tr><th rowspan="2">지역</th><th colspan="2">HOTEL</th><th colspan="2">PKG</th></tr>
+                    <tr><th rowspan="2">지역</th><th colspan="2">HOTEL (호캉스)</th><th colspan="2">PKG (패키지)</th></tr>
                     <tr><th>건수</th><th>공제마일</th><th>건수</th><th>공제마일</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>국내</td><td class="num-col">${fmt(Math.round(c.cnt*0.370))}</td><td class="num-col">${fmt(Math.round(c.miles*0.32))}</td><td class="num-col">${fmt(Math.round(c.cnt*0.015))}</td><td class="num-col">${fmt(Math.round(c.miles*0.02))}</td></tr>
-                    <tr><td>일본</td><td class="num-col">${fmt(Math.round(c.cnt*0.080))}</td><td class="num-col">${fmt(Math.round(c.miles*0.07))}</td><td class="num-col">${fmt(Math.round(c.cnt*0.177))}</td><td class="num-col">${fmt(Math.round(c.miles*0.22))}</td></tr>
-                    <tr><td>유럽</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">${fmt(Math.round(c.cnt*0.257))}</td><td class="num-col">${fmt(Math.round(c.miles*0.31))}</td></tr>
+                    <tr><td>국내</td><td class="num-col font-bold">113</td><td class="num-col">6,198,000</td><td class="num-col">14</td><td class="num-col">934,800</td></tr>
+                    <tr><td>일본</td><td class="num-col font-bold">7</td><td class="num-col">680,000</td><td class="num-col">78</td><td class="num-col">6,601,600</td></tr>
+                    <tr><td>중국</td><td class="num-col font-bold">3</td><td class="num-col">285,000</td><td class="num-col">20</td><td class="num-col">1,654,200</td></tr>
+                    <tr><td>유럽</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">85</td><td class="num-col">6,667,200</td></tr>
+                    <tr><td>미주</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">5</td><td class="num-col">289,000</td></tr>
+                    <tr><td>동남아</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">4</td><td class="num-col">225,200</td></tr>
+                    <tr><td>남태평양</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">1</td><td class="num-col">100,000</td></tr>
+                    <tr><td>크루즈</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">0</td><td class="num-col">0</td></tr>
                 </tbody>
             `;
 
-            // 4. Team Details (NEW-BIZ 단일 표기)
+            // 4. 각 팀별 바우처 사용 실적
             document.getElementById('teamTableBody').innerHTML = `
                 <tr class="font-bold bg-amber-50/60">
-                    <td>NEW-BIZ팀</td><td>계</td><td class="num-col">${fmt(Math.round(c.cnt*0.3848))}</td><td class="num-col">${fmt(Math.round(c.miles*0.301))}</td><td class="num-col">${fmt(Math.round(c.settle*0.2996))}</td><td class="num-col">${fmt(Math.round(c.deposit*0.106))}</td><td class="num-col">${fmt(Math.round(c.revenue*0.106))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td>
+                    <td>NEW-BIZ팀</td><td>계</td>
+                    <td class="num-col font-bold">127</td>
+                    <td class="num-col">7,132,800</td>
+                    <td class="num-col">63,223,850</td>
+                    <td class="num-col">70,600,000</td>
+                    <td class="num-col">8,472,000</td>
+                    <td class="num-col">${fmtPct(-27.4)}</td>
+                    <td class="num-col">${fmtPct(49.4)}</td>
                 </tr>
                 <tr>
-                    <td>상품운영1팀</td><td>PKG</td><td class="num-col">${fmt(Math.round(c.cnt*0.2727))}</td><td class="num-col">${fmt(Math.round(c.miles*0.283))}</td><td class="num-col">${fmt(Math.round(c.settle*0.3112))}</td><td class="num-col">${fmt(Math.round(c.deposit*0.360))}</td><td class="num-col">${fmt(Math.round(c.revenue*0.360))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td>
+                    <td>상품운영1팀</td><td>PKG</td>
+                    <td class="num-col font-bold">90</td>
+                    <td class="num-col">7,331,000</td>
+                    <td class="num-col">65,677,750</td>
+                    <td class="num-col">186,732,000</td>
+                    <td class="num-col">22,407,840</td>
+                    <td class="num-col">${fmtPct(136.8)}</td>
+                    <td class="num-col">${fmtPct(45.2)}</td>
                 </tr>
                 <tr>
-                    <td>상품운영3팀</td><td>PKG</td><td class="num-col">${fmt(Math.round(c.cnt*0.2576))}</td><td class="num-col">${fmt(Math.round(c.miles*0.320))}</td><td class="num-col">${fmt(Math.round(c.settle*0.2828))}</td><td class="num-col">${fmt(Math.round(c.deposit*0.428))}</td><td class="num-col">${fmt(Math.round(c.revenue*0.428))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td>
+                    <td>상품운영3팀</td><td>PKG</td>
+                    <td class="num-col font-bold">85</td>
+                    <td class="num-col">6,667,200</td>
+                    <td class="num-col">59,671,150</td>
+                    <td class="num-col">791,599,000</td>
+                    <td class="num-col">94,991,880</td>
+                    <td class="num-col">${fmtPct(226.9)}</td>
+                    <td class="num-col">${fmtPct(93.2)}</td>
                 </tr>
                 <tr>
-                    <td>칼팍팀</td><td>계</td><td class="num-col">${fmt(Math.round(c.cnt*0.0667))}</td><td class="num-col">${fmt(Math.round(c.miles*0.082))}</td><td class="num-col">${fmt(Math.round(c.settle*0.0900))}</td><td class="num-col">${fmt(Math.round(c.deposit*0.098))}</td><td class="num-col">${fmt(Math.round(c.revenue*0.098))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td>
+                    <td>칼팍팀</td><td>계</td>
+                    <td class="num-col font-bold">22</td>
+                    <td class="num-col">2,115,000</td>
+                    <td class="num-col">18,992,500</td>
+                    <td class="num-col">67,100,000</td>
+                    <td class="num-col">8,052,000</td>
+                    <td class="num-col">0.0%</td>
+                    <td class="num-col">${fmtPct(-8.3)}</td>
                 </tr>
                 <tr>
-                    <td>상품운영2팀</td><td>PKG</td><td class="num-col">${fmt(Math.round(c.cnt*0.0182))}</td><td class="num-col">${fmt(Math.round(c.miles*0.014))}</td><td class="num-col">${fmt(Math.round(c.settle*0.0164))}</td><td class="num-col">${fmt(Math.round(c.deposit*0.008))}</td><td class="num-col">${fmt(Math.round(c.revenue*0.008))}</td><td class="num-col">${fmtPct(momCnt)}</td><td class="num-col">${fmtPct(yoyCnt)}</td>
+                    <td>상품운영2팀</td><td>PKG</td>
+                    <td class="num-col font-bold">6</td>
+                    <td class="num-col">389,000</td>
+                    <td class="num-col">3,471,250</td>
+                    <td class="num-col">41,660,000</td>
+                    <td class="num-col">4,999,200</td>
+                    <td class="num-col">${fmtPct(-50.0)}</td>
+                    <td class="num-col">${fmtPct(-62.5)}</td>
+                </tr>
+                <tr>
+                    <td>부산지점</td><td>-</td>
+                    <td class="num-col">0</td>
+                    <td class="num-col">0</td>
+                    <td class="num-col">0</td>
+                    <td class="num-col">0</td>
+                    <td class="num-col">0</td>
+                    <td class="num-col">-</td>
+                    <td class="num-col">-</td>
+                </tr>
+                <tr class="bg-slate-50 font-bold">
+                    <td>합계</td><td>-</td>
+                    <td class="num-col text-blue-600">330</td>
+                    <td class="num-col">23,635,000</td>
+                    <td class="num-col">211,036,500</td>
+                    <td class="num-col">1,157,691,000</td>
+                    <td class="num-col">138,922,920</td>
+                    <td class="num-col">${fmtPct(20.4)}</td>
+                    <td class="num-col">${fmtPct(37.5)}</td>
                 </tr>
             `;
 
-            renderCharts(curYM, c);
+            renderCharts();
         }
 
-        function renderCharts(curYM, c) {
+        function renderCharts() {
             const ctx1 = document.getElementById('trendChart').getContext('2d');
             if (trendChartObj) trendChartObj.destroy();
             trendChartObj = new Chart(ctx1, {
                 type: 'line',
                 data: {
-                    labels: ['26년 4월', '26년 5월', '26년 6월', '26년 7월', '26년 8월', `${curYM.slice(2,4)}년 ${parseInt(curYM.slice(5))}월`],
+                    labels: ['26년 4월', '26년 5월', '26년 6월', '26년 7월', '26년 8월', '26년 9월'],
                     datasets: [
-                        { label: '사용건수 (건)', data: [185, 208, 150, 285, 274, c.cnt], borderColor: '#2563eb', backgroundColor: '#2563eb', yAxisID: 'y' },
-                        { label: '정산금액 (백만원)', data: [127, 145, 100, 196, 182, Math.round(c.settle/1e6)], borderColor: '#10b981', backgroundColor: '#10b981', yAxisID: 'y1' }
+                        { label: '사용건수 (건)', data: [185, 208, 150, 285, 274, 330], borderColor: '#2563eb', backgroundColor: '#2563eb', yAxisID: 'y' },
+                        { label: '정산금액 (백만원)', data: [121.4, 137.8, 95.8, 186.3, 172.5, 211.0], borderColor: '#10b981', backgroundColor: '#10b981', yAxisID: 'y1' }
                     ]
                 },
                 options: {
@@ -550,10 +558,10 @@
             teamChartObj = new Chart(ctx2, {
                 type: 'doughnut',
                 data: {
-                    labels: ['NEW-BIZ팀', '상품운영1팀', '상품운영3팀', '칼팍팀', '상품운영2팀'],
+                    labels: ['상품운영1팀 (31.1%)', 'NEW-BIZ팀 (30.0%)', '상품운영3팀 (28.3%)', '칼팍팀 (9.0%)', '상품운영2팀 (1.6%)'],
                     datasets: [{
-                        data: [c.settle*0.2996/1e6, c.settle*0.3112/1e6, c.settle*0.2828/1e6, c.settle*0.0900/1e6, c.settle*0.0164/1e6],
-                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899']
+                        data: [65.68, 63.22, 59.67, 18.99, 3.47],
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899']
                     }]
                 },
                 options: { 
