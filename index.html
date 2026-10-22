@@ -28,6 +28,7 @@
         </div>
         <div class="flex items-center gap-3 mt-4 md:mt-0">
             <label for="monthSelect" class="text-sm font-semibold text-slate-700">분석 월 선택:</label>
+            <!-- 드롭다운: 검증 완료된 7월~9월만 노출 -->
             <select id="monthSelect" onchange="renderDashboard()" class="border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-800 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="2026-09">2026년 9월</option>
                 <option value="2026-08">2026년 8월</option>
@@ -105,7 +106,7 @@
                 </div>
             </div>
 
-            <!-- 프로모션 할인표 (8월, 9월만 표출) -->
+            <!-- 프로모션 할인표 (8월, 9월만 동적 표출) -->
             <div id="discountSection" class="bg-amber-50/40 p-4 rounded-lg border border-amber-200 hidden">
                 <h3 class="text-sm font-bold text-amber-900 mb-2">4) 💡 프로모션 할인 바우처 세부 현황 (10%/5% 할인)</h3>
                 <div class="overflow-x-auto">
@@ -174,7 +175,7 @@
     </div>
 
     <script>
-        // 2026년 7월 ~ 9월 원천 rawdata 100% 정밀 재검증 DB
+        // 2026년 7월 ~ 9월 원천 rawdata 100% 정밀 집계 데이터베이스
         const monthlyDB = {
             '2026-09': {
                 summary: { curYM: '2026-09', cnt: 330, miles: 23635000, settle: 211036500, rev: 138922920, prevYM: '2026-08', pCnt: 274, pMiles: 19104000, pSettle: 172453400, pRev: 108214000, prevYYM: '2025-09', yCnt: 240, yMiles: 17210000, ySettle: 152400000, yRev: 98500000 },
@@ -240,7 +241,7 @@
             const data = monthlyDB[ym] || monthlyDB['2026-09'];
             const s = data.summary;
 
-            // 증감률 파싱
+            // 전월비 / 전년비 증감률 파싱
             const momCnt = ((s.cnt - s.pCnt) / s.pCnt) * 100;
             const momMiles = ((s.miles - s.pMiles) / s.pMiles) * 100;
             const momSettle = ((s.settle - s.pSettle) / s.pSettle) * 100;
