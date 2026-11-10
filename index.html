@@ -28,8 +28,8 @@
         </div>
         <div class="flex items-center gap-3 mt-4 md:mt-0">
             <label for="monthSelect" class="text-sm font-semibold text-slate-700">분석 월 선택(출발일 기준):</label>
-            <!-- 7월, 8월, 9월만 노출 -->
             <select id="monthSelect" onchange="renderDashboard()" class="border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-800 font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="2026-10" selected>2026년 10월</option>
                 <option value="2026-09">2026년 9월</option>
                 <option value="2026-08">2026년 8월</option>
                 <option value="2026-07">2026년 7월</option>
@@ -106,7 +106,7 @@
                 </div>
             </div>
 
-            <!-- 프로모션 할인표 (8월, 9월만 자동 노출) -->
+            <!-- 프로모션 할인표 -->
             <div id="discountSection" class="bg-amber-50/40 p-4 rounded-lg border border-amber-200 hidden">
                 <h3 class="text-sm font-bold text-amber-900 mb-2">4) 💡 프로모션 할인 바우처 세부 현황 (10%/5% 할인)</h3>
                 <div class="overflow-x-auto">
@@ -175,8 +175,24 @@
     </div>
 
     <script>
-        // 2026년 7월 ~ 9월 검증 완료 세부 데이터베이스
+        // 2026년 7월 ~ 10월 원천 데이터베이스
         const monthlyDB = {
+            '2026-10': {
+                summary: { curYM: '2026-10', cnt: 346, miles: 22133200, settle: 197110150, rev: 88913952, prevYM: '2026-09', pCnt: 330, pMiles: 23635000, pSettle: 211036500, pRev: 138922920, prevYYM: '2025-10', yCnt: 523, yMiles: 37500000, ySettle: 386000000, yRev: 214000000 },
+                vouchers: [ { name: '10만원 권', cnt: 22 }, { name: '30만원 권', cnt: 81 }, { name: '50만원 권', cnt: 102 }, { name: '100만원 권', cnt: 141 } ],
+                regions: [ { name: '국내', cnt: 135 }, { name: '일본', cnt: 101 }, { name: '유럽', cnt: 32 }, { name: '중국', cnt: 37 }, { name: '미주', cnt: 10 }, { name: '동남아', cnt: 31 }, { name: '남태평양', cnt: 0 }, { name: '크루즈', cnt: 0 } ],
+                crossTab: [ [7, 38, 60, 30], [9, 13, 16, 63], [1, 2, 6, 23], [4, 8, 14, 11], [1, 1, 2, 6], [0, 19, 4, 8], [0, 0, 0, 0], [0, 0, 0, 0] ],
+                discount: [ { name: '10만원 권', m1: '12,000M', m2: '10,800M', norm: 18, disc: 4 }, { name: '30만원 권', m1: '32,000M', m2: '28,800M', norm: 72, disc: 9 }, { name: '50만원 권', m1: '52,000M', m2: '49,400M', norm: 95, disc: 7 }, { name: '100만원 권', m1: '100,000M', m2: '95,000M', norm: 126, disc: 15 } ],
+                pkgHtl: { htl: { cnt: 149, miles: 7755400 }, pkg: { cnt: 197, miles: 14377800 } },
+                pkgHtlRegion: [ { r: '국내', htlC: 127, htlM: 6931200, pkgC: 8, pkgM: 464000 }, { r: '일본', htlC: 0, htlM: 0, pkgC: 101, pkgM: 7619000 }, { r: '유럽', htlC: 0, htlM: 0, pkgC: 32, pkgM: 2673000 }, { r: '중국', htlC: 0, htlM: 0, pkgC: 37, pkgM: 2109800 }, { r: '미주', htlC: 1, htlM: 100000, pkgC: 9, pkgM: 628000 }, { r: '동남아', htlC: 21, htlM: 724200, pkgC: 10, pkgM: 884000 }, { r: '남태평양', htlC: 0, htlM: 0, pkgC: 0, pkgM: 0 }, { r: '크루즈', htlC: 0, htlM: 0, pkgC: 0, pkgM: 0 } ],
+                teams: [
+                    { name: 'NEW-BIZ팀', type: 'HTL/PKG', cnt: 158, miles: 8319400, settle: 73606550, dep: 83835000, rev: 10060200 },
+                    { name: '패키지1팀', type: 'PKG', cnt: 145, miles: 10312800, settle: 92142100, dep: 254464600, rev: 30535752 },
+                    { name: '패키지2팀', type: 'HTL/PKG', cnt: 35, miles: 2837000, settle: 25405500, dep: 359250000, rev: 43110000 },
+                    { name: '대리점팀', type: 'PKG', cnt: 7, miles: 564000, settle: 5056000, dep: 37800002, rev: 4536000 },
+                    { name: '칼팍팀', type: 'PKG', cnt: 1, miles: 100000, settle: 900000, dep: 5600000, rev: 672000 }
+                ]
+            },
             '2026-09': {
                 summary: { curYM: '2026-09', cnt: 330, miles: 23635000, settle: 211036500, rev: 138922920, prevYM: '2026-08', pCnt: 274, pMiles: 19104000, pSettle: 172453400, pRev: 108214000, prevYYM: '2025-09', yCnt: 240, yMiles: 17210000, ySettle: 152400000, yRev: 98500000 },
                 vouchers: [ { name: '10만원 권', cnt: 17 }, { name: '30만원 권', cnt: 53 }, { name: '50만원 권', cnt: 76 }, { name: '100만원 권', cnt: 184 } ],
@@ -189,7 +205,7 @@
                     { name: 'NEW-BIZ팀', type: 'HTL/PKG', cnt: 127, miles: 7132800, settle: 63223850, dep: 70600000, rev: 8472000 },
                     { name: '상품운영1팀', type: 'PKG', cnt: 90, miles: 7331000, settle: 65677750, dep: 186732000, rev: 22407840 },
                     { name: '상품운영3팀', type: 'PKG', cnt: 85, miles: 6667200, settle: 59671150, dep: 791599000, rev: 94991880 },
-                    { name: '칼팍팀', type: 'HTL/PKG', cnt: 22, miles: 2115000, settle: 18992500, dep: 67100000, rev: 8052000 },
+                    { name: '칼팍팀', type: 'PKG', cnt: 22, miles: 2115000, settle: 18992500, dep: 67100000, rev: 8052000 },
                     { name: '상품운영2팀', type: 'PKG', cnt: 6, miles: 389000, settle: 3471250, dep: 41660000, rev: 4999200 }
                 ]
             },
@@ -202,10 +218,10 @@
                 pkgHtl: { htl: { cnt: 168, miles: 9800000 }, pkg: { cnt: 106, miles: 9304000 } },
                 pkgHtlRegion: [ { r: '국내', htlC: 155, htlM: 9100000, pkgC: 14, pkgM: 800000 }, { r: '일본', htlC: 10, htlM: 500000, pkgC: 23, pkgM: 2100000 }, { r: '중국', htlC: 3, htlM: 200000, pkgC: 13, pkgM: 1200000 }, { r: '유럽', htlC: 0, htlM: 0, pkgC: 26, pkgM: 2600000 }, { r: '미주', htlC: 0, htlM: 0, pkgC: 12, pkgM: 1200000 }, { r: '동남아', htlC: 0, htlM: 0, pkgC: 16, pkgM: 1204000 }, { r: '남태평양', htlC: 0, htlM: 0, pkgC: 2, pkgM: 200000 }, { r: '크루즈', htlC: 0, htlM: 0, pkgC: 0, pkgM: 0 } ],
                 teams: [
-                    { name: 'NEW-BIZ팀', type: '계', cnt: 175, miles: 9800000, settle: 88000000, dep: 100000000, rev: 12000000 },
+                    { name: 'NEW-BIZ팀', type: 'HTL/PKG', cnt: 175, miles: 9800000, settle: 88000000, dep: 100000000, rev: 12000000 },
                     { name: '상품운영1팀', type: 'PKG', cnt: 38, miles: 3200000, settle: 29000000, dep: 250000000, rev: 30000000 },
                     { name: '상품운영3팀', type: 'PKG', cnt: 26, miles: 2800000, settle: 25000000, dep: 350000000, rev: 42000000 },
-                    { name: '칼팍팀', type: '계', cnt: 22, miles: 2104000, settle: 19000000, dep: 150000000, rev: 18000000 },
+                    { name: '칼팍팀', type: 'PKG', cnt: 22, miles: 2104000, settle: 19000000, dep: 150000000, rev: 18000000 },
                     { name: '상품운영2팀', type: 'PKG', cnt: 12, miles: 1200000, settle: 11453400, dep: 51783333, rev: 6214000 }
                 ]
             },
@@ -217,11 +233,17 @@
                 discount: [], 
                 pkgHtl: { htl: { cnt: 160, miles: 9200000 }, pkg: { cnt: 125, miles: 10900000 } }, 
                 pkgHtlRegion: [ { r: '국내', htlC: 150, htlM: 8600000, pkgC: 20, pkgM: 1200000 }, { r: '일본', htlC: 8, htlM: 400000, pkgC: 27, pkgM: 2500000 }, { r: '중국', htlC: 2, htlM: 200000, pkgC: 16, pkgM: 1400000 }, { r: '유럽', htlC: 0, htlM: 0, pkgC: 30, pkgM: 3100000 }, { r: '미주', htlC: 0, htlM: 0, pkgC: 15, pkgM: 1400000 }, { r: '동남아', htlC: 0, htlM: 0, pkgC: 15, pkgM: 1100000 }, { r: '남태평양', htlC: 0, htlM: 0, pkgC: 2, pkgM: 200000 }, { r: '크루즈', htlC: 0, htlM: 0, pkgC: 0, pkgM: 0 } ], 
-                teams: [{ name: 'NEW-BIZ팀', type: '계', cnt: 165, miles: 9300000, settle: 85000000, dep: 120000000, rev: 14400000 }, { name: '상품운영1팀', type: 'PKG', cnt: 45, miles: 4000000, settle: 37000000, dep: 300000000, rev: 36000000 }, { name: '상품운영3팀', type: 'PKG', cnt: 40, miles: 3800000, settle: 35000000, dep: 380000000, rev: 45600000 }, { name: '칼팍팀', type: '계', cnt: 20, miles: 2000000, settle: 19000000, dep: 110000000, rev: 13200000 }, { name: '상품운영2팀', type: 'PKG', cnt: 15, miles: 1000000, settle: 10300000, dep: 40000000, rev: 4800000 }] 
+                teams: [
+                    { name: 'NEW-BIZ팀', type: 'HTL/PKG', cnt: 165, miles: 9300000, settle: 85000000, dep: 120000000, rev: 14400000 }, 
+                    { name: '상품운영1팀', type: 'PKG', cnt: 45, miles: 4000000, settle: 37000000, dep: 300000000, rev: 36000000 }, 
+                    { name: '상품운영3팀', type: 'PKG', cnt: 40, miles: 3800000, settle: 35000000, dep: 380000000, rev: 45600000 }, 
+                    { name: '칼팍팀', type: 'PKG', cnt: 20, miles: 2000000, settle: 19000000, dep: 110000000, rev: 13200000 }, 
+                    { name: '상품운영2팀', type: 'PKG', cnt: 15, miles: 1000000, settle: 10300000, dep: 40000000, rev: 4800000 }
+                ] 
             }
         };
 
-        // 2026년 1월 ~ 9월 월별 추이 전용 데이터
+        // 2026년 1월 ~ 10월 월별 추이 데이터
         const yearlyTrendData = [
             { ym: '26년 1월', cnt: 360, settle: 216.6 },
             { ym: '26년 2월', cnt: 408, settle: 290.9 },
@@ -231,7 +253,8 @@
             { ym: '26년 6월', cnt: 150, settle: 95.8 },
             { ym: '26년 7월', cnt: 285, settle: 186.3 },
             { ym: '26년 8월', cnt: 274, settle: 172.5 },
-            { ym: '26년 9월', cnt: 330, settle: 211.0 }
+            { ym: '26년 9월', cnt: 330, settle: 211.0 },
+            { ym: '26년 10월', cnt: 346, settle: 197.1 }
         ];
 
         let trendChartObj = null;
@@ -251,7 +274,7 @@
 
         function renderDashboard() {
             const ym = document.getElementById('monthSelect').value;
-            const data = monthlyDB[ym] || monthlyDB['2026-09'];
+            const data = monthlyDB[ym] || monthlyDB['2026-10'];
             const s = data.summary;
 
             // 전월비 / 전년비 증감률
@@ -391,25 +414,37 @@
                 `;
             }
 
-            // 팀별 실적
+            // 4. 각 팀별 바우처 사용 실적 (노란색 배경 제거 및 정확한 상품유형 표기)
             document.getElementById('teamTableBody').innerHTML = data.teams.map(t => `
-                <tr class="${t.name==='NEW-BIZ팀'?'font-bold bg-amber-50/60':''}">
-                    <td>${t.name}</td><td>${t.type}</td><td class="num-col font-bold">${fmt(t.cnt)}</td><td class="num-col">${fmt(t.miles)}</td><td class="num-col">${fmt(t.settle)}</td><td class="num-col">${fmt(t.dep)}</td><td class="num-col">${fmt(t.rev)}</td>
+                <tr>
+                    <td class="font-semibold text-slate-800">${t.name}</td>
+                    <td>${t.type}</td>
+                    <td class="num-col font-bold">${fmt(t.cnt)}</td>
+                    <td class="num-col">${fmt(t.miles)}</td>
+                    <td class="num-col">${fmt(t.settle)}</td>
+                    <td class="num-col">${fmt(t.dep)}</td>
+                    <td class="num-col">${fmt(t.rev)}</td>
                 </tr>
             `).join('') + `
-                <tr class="bg-slate-50 font-bold"><td>합계</td><td>-</td><td class="num-col text-blue-600">${fmt(s.cnt)}</td><td class="num-col">${fmt(s.miles)}</td><td class="num-col">${fmt(s.settle)}</td><td class="num-col">${fmt(s.dep*3)}</td><td class="num-col">${fmt(s.rev)}</td></tr>
+                <tr class="bg-slate-50 font-bold">
+                    <td>합계</td>
+                    <td>-</td>
+                    <td class="num-col text-blue-600">${fmt(s.cnt)}</td>
+                    <td class="num-col">${fmt(s.miles)}</td>
+                    <td class="num-col">${fmt(s.settle)}</td>
+                    <td class="num-col">${fmt(data.teams.reduce((acc,cur)=>acc+cur.dep,0))}</td>
+                    <td class="num-col">${fmt(s.rev)}</td>
+                </tr>
             `;
 
             renderCharts(ym, data);
         }
 
-        // 차트 렌더링 (선택 월에 따라 1월~당월까지 동적 구간 표출)
+        // 차트 렌더링
         function renderCharts(selectedYM, curData) {
-            // 선택 월 기준 끝 인덱스 계산 (7월=7개, 8월=8개, 9월=9개)
             const monthNum = parseInt(selectedYM.split('-')[1]);
             const filteredTrend = yearlyTrendData.slice(0, monthNum);
 
-            // 차트 제목 변경
             document.getElementById('trendChartTitle').textContent = `2026년 1월 ~ ${monthNum}월 사용건수 및 정산금액 추이`;
 
             const ctx1 = document.getElementById('trendChart').getContext('2d');
@@ -442,7 +477,7 @@
                     labels: curData.teams.map(t => t.name),
                     datasets: [{
                         data: curData.teams.map(t => (t.settle/1e6).toFixed(1)),
-                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899']
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#6366f1']
                     }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
